@@ -4,7 +4,10 @@ var favicon = require('serve-favicon');
 var ejs = require('ejs');
 
 
-//var ejslayouts = require('express-ejs-layouts');
+//var paginate = require('express-paginate');
+
+
+//var ejslayouts = require('express-ejs-layouts');  //to use main layout with yeild 
 var logger = require('morgan');
 var supervisor = require('supervisor');
 var cookieParser = require('cookie-parser');
@@ -17,7 +20,10 @@ var mod_user=require('./lib/user/index');
 
 var app = express();
 
-app.use(express.static(path.join(__dirname, '/public')));
+
+
+app.use(express.static(path.join(__dirname, '')));
+//app.use(express.static(path.join(__dirname, '/public')));
 console.log('this public path'+__dirname);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +39,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+//app.use(paginate.middleware(10, 50));
 
 app.use('/', routes);
 app.use('/users', users);
